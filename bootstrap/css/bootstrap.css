@@ -6093,6 +6093,222 @@ button.close {
   vertical-align: text-top !important;
 }
 
+/* Comienzo del desarrollo de elementos de estilo dedicados al chatbot */
+
+/* Importación de fuenta de tipo de letra deseado desde la API de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif; 
+}
+
+/* Desarrollo de estilo del botón de toggler fijo dentro del footer para abrir el chatbot */
+.chatbot-toggler {
+  position: fixed;
+  right: 40px;
+  bottom: 5px;
+  height: 50px;
+  width: 50px;
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  background-color: #f23030;
+  border-radius: 50%;
+  transition: all 0.2s ease;    
+}
+
+/* Animación al hacer click sobre el ícono */
+.show-chatbot .chatbot-toggler {
+  transform: rotate(90deg);
+}
+
+/* Fijando ícono cambiante dependiendo del estado del chatbot, para que los dos posibles íconos siempre se encuentren centrados */
+.chatbot-toggler span {
+  position: absolute;
+}
+
+/* Se fija como posición principal que el ícono de tache se encuentre fijo cuando el chatbot esta abierto dentro de la pantalla respectiva */
+.show-chatbot .chatbot-toggler span:first-child, 
+.chatbot-toggler span:last-child {
+  opacity: 0;
+}
+
+/* Se  fija como posición principal el ícono de diálogo/chat para cuando el usuario desea abrir el chatbot */
+.show-chatbot .chatbot-toggler span:last-child {
+  opacity: 1;
+}
+
+/* Se fija el tamaño de la pestaña de pop up de la sección del chatbot general de nuestro espacio */
+.chatbot {
+  position: fixed;
+  right: 35px;
+  bottom: 60px;
+  width: 420px;
+  transform: scale(0.5);
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: #fff6f5;
+  border-radius: 15px;
+  box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),
+              0 32px 64px -48px rgba(0,0,0,0.5);
+  transition: all 0.1s ease;            
+}
+
+/* Se maneja como estilo de ocultar el texto cuando se inicia la página, a menos que este abierto el chatbot */
+.show-chatbot .chatbot {
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Se da estilo al bloque de fondo del encabezado de nuestra pestaña del chatbot */
+.chatbot header {
+  background: #f23847;
+  padding: 16px 0;
+  text-align: center;
+  position: relative;
+}
+
+/* Estilo de texto en color y tamaño fijo */
+.chatbot header h2 {
+  color: #f2f2f2;
+  font-size: 1.4rem;
+  margin-bottom: 0;
+}
+
+/* Colocando estilo de un ícono de cerrar dentro del encabezado */
+.chatbot header span {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+  transform: translateY(-50%);
+}
+
+/* Estilo de todo el resto de la caja del chatbot, incluyendo el fondo de los mensajes enviados y de la caja de texto de env{ios */
+.chatbot .chatbox{
+  height: 370px;
+  /* 510px originalmente */
+  overflow-y: auto;
+  padding: 30px 20px 100px;
+}
+
+/* Marco destinado a la caja de mensajes entre usuario y chatbot */
+.chatbox .chat {
+  display: flex;
+  list-style: none;
+}
+
+/* Centrado del ícono perteneciente a cada uno de los mensajes del chatbot respectivamente */
+.chatbox .incoming span{
+  height: 32px;
+  width: 32px;
+  color: #f2f2f2;
+  cursor: default;
+  align-self: flex-end;
+  background: #f23847;
+  text-align: center;
+  line-height: 32px;
+  border-radius: 4px;
+  margin: 0 10px 7px 0;
+}
+
+/* Margen de ajuste de los bordes de los textos */
+.chatbox .outgoing {
+  margin: 20px 0;
+  justify-content: flex-end;
+}
+
+/* Estilo de mensaje proveniente del chatbot, dentro de la burbuja de texto */
+.chatbox .chat p {
+  white-space: pre-wrap;
+  color: #f2f2f2;
+  max-width: 75%;
+  font-size: 0.95rem;
+  padding: 12px 16px;
+  margin-bottom: 0%;
+  border-radius: 10px 10px 0 10px;
+  background: #f23847;
+}
+
+/* Estilo de mensaje proveniente del usuario, correspondiente a su burbuja de texto */
+.chatbox .incoming p {
+  color: #000;
+  background: #f2f2f2;
+  border-radius: 10px 10px 10px 0;
+}
+
+/* Desarrollo de apartado de ingreso de texto por parte del usuario */
+.chatbot .chat-input {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  gap: 5px;
+  background: #fff;
+  padding: 5px 20px;
+  border-top: 1px solid #ccc;
+}
+
+/* Parte del cuadro en el que se marcará el texto a enviar, y dejando un espacio para ícono de enviado */
+.chat-input textarea {
+  height: 55px;
+  width: 100%;
+  border: none;
+  outline: none;
+  max-height: 180px;
+  font-size: 0.95rem;
+  resize: none;
+  padding: 16px 15px 16px 0;
+}
+
+/* Ícono de enviado dentro del cuadro de texto de interacción del usuario */
+.chat-input span {
+  align-self: flex-end;
+  height: 55px;
+  line-height: 55px;
+  color: #f23847;
+  font-size: 1.35rem;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+/* Estilo de visibilidad del ícono solamente disponible cuando se tenga un mensaje a enviar por parte del usuario */
+.chat-input textarea:valid ~ span {
+  visibility: visible;
+}
+
+/* Responsividad del chatbot a la página, de adecua a tomar todo el espacia cuando las dimensiones son de 490 o menos */
+@media(max-width: 500px) {
+  .chatbot {
+    right: 0;
+    bottom: 0;
+    width: 100;
+    height: 100;
+    border-radius: 0;
+    z-index: 1;
+  }
+
+  .chatbot .chatbot {
+    height: 90%;
+  }
+
+  .chatbot header span {
+    display: block;
+  }
+}
+
+/* Final del desarrollo de elementos de estilo dedicados al chatbot */
+
 /* Tipo de estilo nuevo para encabezado del header de la página */
 .bg-principal {
   background-color: #f23030 !important;
